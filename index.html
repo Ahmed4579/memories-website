@@ -467,6 +467,19 @@
             font-size: 1.2rem;
         }
 
+        .photo-count {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(136, 14, 79, 0.1);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-top: 8px;
+        }
+
         /* ===== ALBUM MODAL ===== */
         .album-modal {
             display: none;
@@ -551,6 +564,18 @@
             opacity: 0.9;
         }
 
+        .album-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+            padding: 20px 10px 10px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
         /* Lightbox */
         .lightbox {
             display: none;
@@ -613,6 +638,18 @@
         .lightbox-prev { left: 20px; }
         .lightbox-next { right: 20px; }
 
+        .lightbox-caption {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 1.1rem;
+            background: rgba(0,0,0,0.6);
+            padding: 10px 25px;
+            border-radius: 25px;
+        }
+
         .memories-footer {
             text-align: center;
             padding: 60px 20px;
@@ -665,6 +702,7 @@
             .lightbox-nav { font-size: 1.5rem; padding: 10px 15px; }
         }
     </style>
+<base target="_blank">
 <base target="_blank">
 </head>
 <body>
@@ -730,7 +768,7 @@
                 <span class="day">19</span>
                 <span class="month">مارس</span>
             </div>
-            <div class="memory-content" onclick="openAlbum()">
+            <div class="memory-content" onclick="openAlbum('march19')">
                 <div class="memory-image">
                     <img src="IMG-20260320-WA0021.jpg" alt="19 مارس - فنجان القهوة">
                     <div class="memory-overlay"><span class="memory-icon">☕</span></div>
@@ -746,72 +784,88 @@
                         <span>📸</span>
                         <span>اضغط هنا عشان تشوف الألبوم</span>
                     </div>
+                    <div class="photo-count">📷 9 صور + فيديو</div>
                 </div>
             </div>
         </div>
 
-        <!-- 1 April -->
+        <!-- 1 April - ALBUM (7 images) -->
         <div class="memory-card">
             <div class="memory-date-badge">
                 <span class="day">01</span>
                 <span class="month">أبريل</span>
             </div>
-            <div class="memory-content reverse">
+            <div class="memory-content reverse" onclick="openAlbum('april1')">
                 <div class="memory-image">
-                    <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=500" alt="1 أبريل">
+                    <img src="IMG20260401185646.jpg" alt="1 أبريل">
                     <div class="memory-overlay"><span class="memory-icon">🌸</span></div>
                 </div>
                 <div class="memory-text">
-                    <h3>يوم تاني جميل</h3>
+                    <h3>1 أبريل - يوم تاني جميل</h3>
                     <p>1 أبريل... مش مقلب! ده يوم حقيقي حلو مع بعض. كل يوم بيكون أحلى من اللي قبله.</p>
                     <div class="memory-tags">
                         <span class="tag">🌷 ربيع</span>
                         <span class="tag">💑 مع بعض</span>
                     </div>
+                    <div class="album-hint">
+                        <span>📸</span>
+                        <span>اضغط هنا عشان تشوف الألبوم</span>
+                    </div>
+                    <div class="photo-count">📷 7 صور</div>
                 </div>
             </div>
         </div>
 
-        <!-- 8 April -->
+        <!-- 8 April - ALBUM (11 images) -->
         <div class="memory-card">
             <div class="memory-date-badge">
                 <span class="day">08</span>
                 <span class="month">أبريل</span>
             </div>
-            <div class="memory-content">
+            <div class="memory-content" onclick="openAlbum('april8')">
                 <div class="memory-image">
-                    <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=500" alt="8 أبريل">
+                    <img src="IMG20260408173446.jpg" alt="8 أبريل">
                     <div class="memory-overlay"><span class="memory-icon">🎉</span></div>
                 </div>
                 <div class="memory-text">
-                    <h3>ذكرى حلوة</h3>
+                    <h3>8 أبريل - ذكرى حلوة</h3>
                     <p>8 أبريل... يوم فاضل مشاعر وحنية. ربنا يديم اللحظات الحلوة دي بينا.</p>
                     <div class="memory-tags">
                         <span class="tag">🎈 فرحة</span>
                         <span class="tag">🏠 بيتنا</span>
                     </div>
+                    <div class="album-hint">
+                        <span>📸</span>
+                        <span>اضغط هنا عشان تشوف الألبوم</span>
+                    </div>
+                    <div class="photo-count">📷 11 صورة</div>
                 </div>
             </div>
         </div>
 
-        <!-- 23 April -->
+        <!-- 23 April - ALBUM (7 images) -->
         <div class="memory-card">
             <div class="memory-date-badge">
                 <span class="day">23</span>
                 <span class="month">أبريل</span>
             </div>
-            <div class="memory-content reverse">
+            <div class="memory-content reverse" onclick="openAlbum('april23')">
                 <div class="memory-image">
-                    <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500" alt="23 أبريل">
+                    <img src="IMG20260423173036.jpg" alt="23 أبريل">
                     <div class="memory-overlay"><span class="memory-icon">💎</span></div>
                 </div>
                 <div class="memory-text">
-                    <h3>أجمل يوم</h3>
+                    <h3>23 أبريل - أجمل يوم</h3>
                     <p>23 أبريل... ذكرى مميزة جداً في قلبي. كل يوم بيعدي بيكون أحلى من اللي قبله.</p>
                     <div class="memory-tags">
                         <span class="tag">💍 خاص</span>
                         <span class="tag">🔥 حب</span>
                     </div>
+                    <div class="album-hint">
+                        <span>📸</span>
+                        <span>اضغط هنا عشان تشوف الألبوم</span>
+                    </div>
+                    <div class="photo-count">📷 7 صور</div>
                 </div>
             </div>
         </div>
@@ -826,7 +880,7 @@
     <!-- ALBUM MODAL -->
     <div class="album-modal" id="albumModal">
         <div class="album-header">
-            <h3 class="album-title">📸 ألبوم 19 مارس</h3>
+            <h3 class="album-title" id="albumTitle">📸 الألبوم</h3>
             <button class="album-close" onclick="closeAlbum()">✕</button>
         </div>
         <div class="album-grid" id="albumGrid"></div>
@@ -839,24 +893,71 @@
         <button class="lightbox-nav lightbox-next" onclick="nextItem()">›</button>
         <img class="lightbox-img" id="lightboxImg" src="" alt="">
         <video class="lightbox-video" id="lightboxVideo" controls style="display:none;"></video>
+        <div class="lightbox-caption" id="lightboxCaption"></div>
     </div>
 
     <canvas id="confetti"></canvas>
 
     <script>
         // ===== ALBUM DATA =====
-        const albumItems = [
-            { type: 'image', src: 'IMG-20260320-WA0002.jpg', caption: 'لحظة حلوة' },
-            { type: 'image', src: 'IMG-20260320-WA0007.jpg', caption: 'ذكرى جميلة' },
-            { type: 'image', src: 'IMG-20260320-WA0015.jpg', caption: 'مع بعض' },
-            { type: 'image', src: 'IMG-20260320-WA0016.jpg', caption: 'ضحكة حلوة' },
-            { type: 'image', src: 'IMG-20260320-WA0017.jpg', caption: 'لحظة سعيدة' },
-            { type: 'image', src: 'IMG-20260320-WA0019.jpg', caption: 'ذكرى مميزة' },
-            { type: 'image', src: 'IMG-20260320-WA0021.jpg', caption: 'أول فنجان ☕' },
-            { type: 'video', src: 'VID-20260320-WA0000.mp4', caption: 'فيديو حلو' },
-            { type: 'video', src: 'VID-20260320-WA0009.mp4', caption: 'لحظة نادرة' }
-        ];
+        const albums = {
+            march19: {
+                title: '📸 ألبوم 19 مارس',
+                items: [
+                    { type: 'image', src: 'IMG-20260320-WA0002.jpg', caption: 'لحظة حلوة' },
+                    { type: 'image', src: 'IMG-20260320-WA0007.jpg', caption: 'ذكرى جميلة' },
+                    { type: 'image', src: 'IMG-20260320-WA0015.jpg', caption: 'مع بعض' },
+                    { type: 'image', src: 'IMG-20260320-WA0016.jpg', caption: 'ضحكة حلوة' },
+                    { type: 'image', src: 'IMG-20260320-WA0017.jpg', caption: 'لحظة سعيدة' },
+                    { type: 'image', src: 'IMG-20260320-WA0019.jpg', caption: 'ذكرى مميزة' },
+                    { type: 'image', src: 'IMG-20260320-WA0021.jpg', caption: 'أول فنجان ☕' },
+                    { type: 'video', src: 'VID-20260320-WA0000.mp4', caption: 'فيديو حلو' },
+                    { type: 'video', src: 'VID-20260320-WA0009.mp4', caption: 'لحظة نادرة' }
+                ]
+            },
+            april1: {
+                title: '📸 ألبوم 1 أبريل',
+                items: [
+                    { type: 'image', src: 'IMG20260401185646.jpg', caption: 'صورة 1' },
+                    { type: 'image', src: 'IMG20260401190225.jpg', caption: 'صورة 2' },
+                    { type: 'image', src: 'IMG20260401190900.jpg', caption: 'صورة 3' },
+                    { type: 'image', src: 'IMG20260401193717.jpg', caption: 'صورة 4' },
+                    { type: 'image', src: 'IMG20260401193734.jpg', caption: 'صورة 5' },
+                    { type: 'image', src: 'IMG20260401194903.jpg', caption: 'صورة 6' },
+                    { type: 'image', src: 'IMG20260401195556.jpg', caption: 'صورة 7' }
+                ]
+            },
+            april8: {
+                title: '📸 ألبوم 8 أبريل',
+                items: [
+                    { type: 'image', src: 'IMG20260408173446.jpg', caption: 'صورة 1' },
+                    { type: 'image', src: 'IMG20260408173452.jpg', caption: 'صورة 2' },
+                    { type: 'image', src: 'IMG20260408173649.jpg', caption: 'صورة 3' },
+                    { type: 'image', src: 'IMG20260408175254_01.jpg', caption: 'صورة 4' },
+                    { type: 'image', src: 'IMG20260408175421_01.jpg', caption: 'صورة 5' },
+                    { type: 'image', src: 'IMG20260408181744.jpg', caption: 'صورة 6' },
+                    { type: 'image', src: 'IMG20260408181841_01.jpg', caption: 'صورة 7' },
+                    { type: 'image', src: 'IMG20260408184007.jpg', caption: 'صورة 8' },
+                    { type: 'image', src: 'IMG20260408195534.jpg', caption: 'صورة 9' },
+                    { type: 'image', src: 'IMG20260408195547.jpg', caption: 'صورة 10' },
+                    { type: 'image', src: 'IMG20260408204305.jpg', caption: 'صورة 11' }
+                ]
+            },
+            april23: {
+                title: '📸 ألبوم 23 أبريل',
+                items: [
+                    { type: 'image', src: 'IMG20260423173036.jpg', caption: 'صورة 1' },
+                    { type: 'image', src: 'IMG20260423173039.jpg', caption: 'صورة 2' },
+                    { type: 'image', src: 'IMG20260423175117.jpg', caption: 'صورة 3' },
+                    { type: 'image', src: 'IMG20260423175126.jpg', caption: 'صورة 4' },
+                    { type: 'image', src: 'IMG20260423181010.jpg', caption: 'صورة 5' },
+                    { type: 'image', src: 'IMG20260423202750.jpg', caption: 'صورة 6' },
+                    { type: 'image', src: 'IMG20260423204429.jpg', caption: 'صورة 7' }
+                ]
+            }
+        };
 
+        let currentAlbum = null;
         let currentIndex = 0;
 
         // ===== LOGIN =====
@@ -905,13 +1006,21 @@
         }
 
         // ===== ALBUM =====
-        function openAlbum() {
+        function openAlbum(albumId) {
+            const album = albums[albumId];
+            if (!album) return;
+
+            currentAlbum = album;
             const modal = document.getElementById('albumModal');
             const grid = document.getElementById('albumGrid');
+            const title = document.getElementById('albumTitle');
 
-            grid.innerHTML = albumItems.map((item, index) => `
+            title.textContent = album.title;
+
+            grid.innerHTML = album.items.map((item, index) => `
                 <div class="album-item ${item.type === 'video' ? 'video' : ''}" onclick="openLightbox(${index})">
                     <img src="${item.src}" alt="${item.caption}" loading="lazy">
+                    <div class="album-caption">${item.caption}</div>
                 </div>
             `).join('');
 
@@ -927,10 +1036,13 @@
         // ===== LIGHTBOX =====
         function openLightbox(index) {
             currentIndex = index;
-            const item = albumItems[index];
+            const item = currentAlbum.items[index];
             const lightbox = document.getElementById('lightbox');
             const img = document.getElementById('lightboxImg');
             const video = document.getElementById('lightboxVideo');
+            const caption = document.getElementById('lightboxCaption');
+
+            caption.textContent = item.caption;
 
             if (item.type === 'video') {
                 img.style.display = 'none';
@@ -955,12 +1067,12 @@
         }
 
         function prevItem() {
-            currentIndex = (currentIndex - 1 + albumItems.length) % albumItems.length;
+            currentIndex = (currentIndex - 1 + currentAlbum.items.length) % currentAlbum.items.length;
             openLightbox(currentIndex);
         }
 
         function nextItem() {
-            currentIndex = (currentIndex + 1) % albumItems.length;
+            currentIndex = (currentIndex + 1) % currentAlbum.items.length;
             openLightbox(currentIndex);
         }
 
