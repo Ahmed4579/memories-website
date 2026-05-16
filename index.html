@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ذكرياتنا ❤️ بطوطي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #880e4f;
+            --primary-light: #c2185b;
+            --primary-dark: #560027;
+            --bg-pink: #fce4ec;
+            --bg-light: #fff0f5;
+            --text-dark: #4a0e2e;
+            --white: #ffffff;
+            --shadow: 0 10px 40px rgba(136, 14, 79, 0.15);
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, var(--bg-pink) 0%, var(--bg-light) 50%, #f3e5f5 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: var(--text-dark);
+        }
+
+        /* ===== LOGIN ===== */
+        .login-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 50px 40px;
+            width: 90%;
+            max-width: 420px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            z-index: 10;
+            animation: slideUp 0.8s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-10px); }
+            40% { transform: translateX(10px); }
+            60% { transform: translateX(-10px); }
+            80% { transform: translateX(10px); }
+        }
+
+        .heart-pulse {
+            font-size: 3.5rem;
+            animation: pulse 1.5s ease-in-out infinite;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .login-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .login-subtitle {
+            color: var(--primary-light);
+            font-size: 1rem;
+            margin-bottom: 35px;
+            opacity: 0.8;
+        }
+
+        .input-group {
+            text-align: right;
+            margin-bottom: 22px;
+        }
+
+        .input-group label {
+            display: block;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 18px;
+            border: 2px solid rgba(136, 14, 79, 0.15);
+            border-radius: 15px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+            color: var(--text-dark);
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            background: var(--white);
+            box-shadow: 0 0 0 4px rgba(136, 14, 79, 0.1);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: var(--white);
+            border: none;
+            border-radius: 15px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 8px 25px rgba(136, 14, 79, 0.3);
+        }
+
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(136, 14, 79, 0.4);
+        }
+
+        .error-msg {
+            color: #e53935;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            font-weight: 500;
+        }
+
+        .error-msg.show { opacity: 1; }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 1.8rem;
+            opacity: 0.3;
+            animation: floatHeart 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes floatHeart {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            50% { transform: translateY(-10vh) rotate(180deg); }
+        }
+
+        /* ===== WELCOME ===== */
+        .welcome-screen {
+            display: none;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            animation: fadeIn 1s ease;
+        }
+
+        .welcome-screen.active { display: flex; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .welcome-content {
+            animation: scaleIn 0.8s ease 0.3s both;
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .welcome-year {
+            font-size: 6rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 10px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px rgba(136, 14, 79, 0.3)); }
+            to { filter: drop-shadow(0 0 40px rgba(136, 14, 79, 0.6)); }
+        }
+
+        .welcome-title {
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .welcome-text {
+            color: var(--primary-light);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            opacity: 0.8;
+        }
+
+        .start-memories-btn {
+            padding: 18px 50px;
+            background: var(--white);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: bounce 2s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .start-memories-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: scale(1.05);
+        }
+
+        /* ===== MEMORIES ===== */
+        .memories-container {
+            display: none;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .memories-container.active {
+            display: block;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .year-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: var(--white);
+            padding: 10px 40px;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            box-shadow: var(--shadow);
+            margin-bottom: 15px;
+        }
+
+        .timeline-title {
+            font-size: 2rem;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .timeline-line {
+            width: 2px;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--primary), transparent);
+            margin: 20px auto 0;
+        }
+
+        .memory-card {
+            margin-bottom: 80px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.8s ease;
+        }
+
+        .memory-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .memory-date-badge {
+            position: absolute;
+            top: -20px;
+            right: 50%;
+            transform: translateX(50%);
+            background: var(--white);
+            border: 3px solid var(--primary);
+            border-radius: 20px;
+            padding: 12px 25px;
+            text-align: center;
+            z-index: 10;
+            box-shadow: 0 5px 20px rgba(136, 14, 79, 0.2);
+            animation: datePop 0.5s ease;
+        }
+
+        @keyframes datePop {
+            0% { transform: translateX(50%) scale(0); }
+            80% { transform: translateX(50%) scale(1.1); }
+            100% { transform: translateX(50%) scale(1); }
+        }
+
+        .memory-date-badge .day {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+        }
+
+        .memory-date-badge .month {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--primary-light);
+            font-weight: 600;
+        }
+
+        .memory-content {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            margin-top: 30px;
+        }
+
+        .memory-content.reverse { direction: ltr; }
+        .memory-content.reverse .memory-text { direction: rtl; }
+
+        .memory-image {
+            position: relative;
+            overflow: hidden;
+            min-height: 300px;
+        }
+
+        .memory-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .memory-card:hover .memory-image img { transform: scale(1.1); }
+
+        .memory-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(136, 14, 79, 0.4), transparent);
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 20px;
+        }
+
+        .memory-icon {
+            font-size: 2.5rem;
+            animation: iconBounce 2s ease infinite;
+        }
+
+        @keyframes iconBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .memory-text {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .memory-text h3 {
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .memory-text p {
+            color: var(--text-dark);
+            line-height: 2;
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+        }
+
+        .memory-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: rgba(136, 14, 79, 0.1);
+            color: var(--primary);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .tag:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .memories-footer {
+            text-align: center;
+            padding: 60px 20px;
+            margin-top: 40px;
+        }
+
+        .footer-heart {
+            font-size: 3rem;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.15); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.1); }
+        }
+
+        .memories-footer p {
+            color: var(--primary);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .footer-sub {
+            color: var(--primary-light) !important;
+            font-size: 0.9rem !important;
+            margin-top: 10px;
+            opacity: 0.7;
+        }
+
+        #confetti {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .memory-content { grid-template-columns: 1fr; }
+            .memory-content.reverse { direction: rtl; }
+            .memory-image { min-height: 250px; }
+            .memory-text { padding: 25px; }
+            .welcome-year { font-size: 4rem; }
+            .login-container { padding: 35px 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- LOGIN -->
+    <div class="login-page" id="loginPage">
+        <div class="login-container">
+            <div class="heart-pulse">❤️</div>
+            <h1 class="login-title">ذكرياتنا</h1>
+            <p class="login-subtitle">أهلاً بيك يا بطوطي</p>
+
+            <div class="input-group">
+                <label>الاسم</label>
+                <input type="text" id="username" placeholder="اكتب اسمك..." autocomplete="off">
+            </div>
+
+            <div class="input-group">
+                <label>الباسورد</label>
+                <input type="password" id="password" placeholder="••••••••">
+            </div>
+
+            <button class="login-btn" onclick="login()">
+                <span>دخول</span>
+                <span>→</span>
+            </button>
+
+            <p class="error-msg" id="errorMsg">الاسم أو الباسورد غلط يا حبيبي 😢</p>
+        </div>
+
+        <div class="floating-heart" style="left:10%;animation-delay:0s">💕</div>
+        <div class="floating-heart" style="left:30%;animation-delay:2s">💖</div>
+        <div class="floating-heart" style="left:50%;animation-delay:4s">💗</div>
+        <div class="floating-heart" style="left:70%;animation-delay:1s">💝</div>
+        <div class="floating-heart" style="left:90%;animation-delay:3s">💘</div>
+    </div>
+
+    <!-- WELCOME -->
+    <div class="welcome-screen" id="welcomeScreen">
+        <div class="welcome-content">
+            <div class="welcome-year">2026</div>
+            <h1 class="welcome-title">سنة حلوة يا بطوطي ❤️</h1>
+            <p class="welcome-text">عشان كل لحظة معاك تستاهل تتذكر</p>
+            <button class="start-memories-btn" onclick="showMemories()">ابدأ الرحلة 🚀</button>
+        </div>
+    </div>
+
+    <!-- MEMORIES -->
+    <div class="memories-container" id="memoriesContainer">
+
+        <div class="timeline-header">
+            <div class="year-badge">2026</div>
+            <h2 class="timeline-title">رحلة ذكرياتنا</h2>
+            <div class="timeline-line"></div>
+        </div>
+
+        <!-- 19 March - صورة الفنجان -->
+        <div class="memory-card">
+            <div class="memory-date-badge">
+                <span class="day">19</span>
+                <span class="month">مارس</span>
+            </div>
+            <div class="memory-content">
+                <div class="memory-image">
+                    <img src="IMG-20260320-WA0021.jpg" alt="19 مارس - فنجان القهوة">
+                    <div class="memory-overlay"><span class="memory-icon">☕</span></div>
+                </div>
+                <div class="memory-text">
+                    <h3>أول فنجان مع بعض</h3>
+                    <p>19 مارس 2026... يوم ما شربنا أول فنجان قهوة مع بعض. كل رشفة كانت مليانة حب ودفا. افتكر لما قعدنا واتكلمنا وسهرنا؟</p>
+                    <div class="memory-tags">
+                        <span class="tag">☕ قهوة</span>
+                        <span class="tag">❤️ أول مرة</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 1 April -->
+        <div class="memory-card">
+            <div class="memory-date-badge">
+                <span class="day">01</span>
+                <span class="month">أبريل</span>
+            </div>
+            <div class="memory-content reverse">
+                <div class="memory-image">
+                    <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=500" alt="1 أبريل">
+                    <div class="memory-overlay"><span class="memory-icon">🌸</span></div>
+                </div>
+                <div class="memory-text">
+                    <h3>يوم تاني جميل</h3>
+                    <p>1 أبريل... مش مقلب! ده يوم حقيقي حلو مع بعض. كل يوم بيكون أحلى من اللي قبله.</p>
+                    <div class="memory-tags">
+                        <span class="tag">🌷 ربيع</span>
+                        <span class="tag">💑 مع بعض</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8 April -->
+        <div class="memory-card">
+            <div class="memory-date-badge">
+                <span class="day">08</span>
+                <span class="month">أبريل</span>
+            </div>
+            <div class="memory-content">
+                <div class="memory-image">
+                    <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=500" alt="8 أبريل">
+                    <div class="memory-overlay"><span class="memory-icon">🎉</span></div>
+                </div>
+                <div class="memory-text">
+                    <h3>ذكرى حلوة</h3>
+                    <p>8 أبريل... يوم فاضل مشاعر وحنية. ربنا يديم اللحظات الحلوة دي بينا.</p>
+                    <div class="memory-tags">
+                        <span class="tag">🎈 فرحة</span>
+                        <span class="tag">🏠 بيتنا</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 23 April -->
+        <div class="memory-card">
+            <div class="memory-date-badge">
+                <span class="day">23</span>
+                <span class="month">أبريل</span>
+            </div>
+            <div class="memory-content reverse">
+                <div class="memory-image">
+                    <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500" alt="23 أبريل">
+                    <div class="memory-overlay"><span class="memory-icon">💎</span></div>
+                </div>
+                <div class="memory-text">
+                    <h3>أجمل يوم</h3>
+                    <p>23 أبريل... ذكرى مميزة جداً في قلبي. كل يوم بيعدي بيكون أحلى من اللي قبله.</p>
+                    <div class="memory-tags">
+                        <span class="tag">💍 خاص</span>
+                        <span class="tag">🔥 حب</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="memories-footer">
+            <div class="footer-heart">❤️</div>
+            <p>بطوطي... كل لحظة معاك تستاهل تتعاش</p>
+            <p class="footer-sub">Made with love · 2026</p>
+        </div>
+    </div>
+
+    <canvas id="confetti"></canvas>
+
+    <script>
+        function login() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const errorMsg = document.getElementById('errorMsg');
+
+            if (username === 'بطوطي' && password === '18122004') {
+                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('welcomeScreen').classList.add('active');
+
+                const music = document.getElementById('bgMusic');
+                music.volume = 0.3;
+                music.play().catch(e => console.log('Auto-play blocked:', e));
+
+                launchConfetti();
+            } else {
+                errorMsg.classList.add('show');
+                const container = document.querySelector('.login-container');
+                container.style.animation = 'shake 0.5s ease';
+                setTimeout(() => container.style.animation = '', 500);
+            }
+        }
+
+        document.getElementById('password').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') login();
+        });
+
+        function showMemories() {
+            document.getElementById('welcomeScreen').classList.remove('active');
+            document.getElementById('memoriesContainer').classList.add('active');
+            setupScrollAnimation();
+            launchConfetti();
+        }
+
+        function setupScrollAnimation() {
+            const cards = document.querySelectorAll('.memory-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.2, rootMargin: '0px 0px -50px 0px' });
+            cards.forEach(card => observer.observe(card));
+        }
+
+        function launchConfetti() {
+            const canvas = document.getElementById('confetti');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const colors = ['#ff6b9d', '#c44569', '#f8b500', '#ff6b6b', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#ff5722', '#ff9800', '#ffc107', '#4caf50'];
+            const particles = [];
+
+            for (let i = 0; i < 150; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height - canvas.height,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    size: Math.random() * 12 + 4,
+                    speedY: Math.random() * 4 + 2,
+                    speedX: Math.random() * 3 - 1.5,
+                    rotation: Math.random() * 360,
+                    rotationSpeed: Math.random() * 8 - 4,
+                    wobble: Math.random() * Math.PI * 2,
+                    wobbleSpeed: Math.random() * 0.1 + 0.05
+                });
+            }
+
+            let startTime = Date.now();
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                if (Date.now() - startTime > 6000) {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    return;
+                }
+
+                particles.forEach(p => {
+                    p.y += p.speedY;
+                    p.x += Math.sin(p.wobble) * 2 + p.speedX;
+                    p.wobble += p.wobbleSpeed;
+                    p.rotation += p.rotationSpeed;
+
+                    if (p.y > canvas.height + 50) {
+                        p.y = -50;
+                        p.x = Math.random() * canvas.width;
+                    }
+
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate((p.rotation * Math.PI) / 180);
+                    ctx.fillStyle = p.color;
+
+                    const shape = Math.floor(p.size) % 3;
+                    if (shape === 0) {
+                        ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size);
+                    } else if (shape === 1) {
+                        ctx.beginPath();
+                        ctx.arc(0, 0, p.size/2, 0, Math.PI * 2);
+                        ctx.fill();
+                    } else {
+                        ctx.beginPath();
+                        ctx.moveTo(0, -p.size/2);
+                        ctx.lineTo(-p.size/2, p.size/2);
+                        ctx.lineTo(p.size/2, p.size/2);
+                        ctx.closePath();
+                        ctx.fill();
+                    }
+                    ctx.restore();
+                });
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        window.addEventListener('resize', () => {
+            const canvas = document.getElementById('confetti');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
