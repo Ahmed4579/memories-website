@@ -362,6 +362,12 @@
             box-shadow: var(--shadow);
             border: 1px solid rgba(255, 255, 255, 0.6);
             margin-top: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .memory-content:hover {
+            transform: translateY(-5px);
         }
 
         .memory-content.reverse { direction: ltr; }
@@ -447,6 +453,166 @@
             transform: translateY(-2px);
         }
 
+        .album-hint {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-light);
+            font-size: 0.9rem;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        .album-hint span {
+            font-size: 1.2rem;
+        }
+
+        /* ===== ALBUM MODAL ===== */
+        .album-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            overflow-y: auto;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .album-modal.active { display: block; }
+
+        .album-header {
+            position: sticky;
+            top: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .album-title {
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .album-close {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 5px 15px;
+            border-radius: 50%;
+            transition: background 0.3s ease;
+        }
+
+        .album-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .album-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .album-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            aspect-ratio: 1;
+        }
+
+        .album-item:hover {
+            transform: scale(1.03);
+        }
+
+        .album-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .album-item.video::after {
+            content: '▶️';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            opacity: 0.9;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            animation: scaleIn 0.3s ease;
+        }
+
+        .lightbox-video {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px; right: 20px;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 2.5rem;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: var(--white);
+            font-size: 2rem;
+            padding: 15px 20px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background 0.3s ease;
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .lightbox-prev { left: 20px; }
+        .lightbox-next { right: 20px; }
+
         .memories-footer {
             text-align: center;
             padding: 60px 20px;
@@ -495,13 +661,16 @@
             .memory-text { padding: 25px; }
             .welcome-year { font-size: 4rem; }
             .login-container { padding: 35px 25px; }
+            .album-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+            .lightbox-nav { font-size: 1.5rem; padding: 10px 15px; }
         }
     </style>
+<base target="_blank">
 </head>
 <body>
 
     <audio id="bgMusic" loop>
-       <source src="WhatsApp Audio 2026-05-16 at 3.40.14 PM.mpeg" type="audio/mpeg">
+        <source src="WhatsApp Audio 2026-05-16 at 3.40.14 PM.mpeg" type="audio/mpeg">
     </audio>
 
     <!-- LOGIN -->
@@ -555,23 +724,27 @@
             <div class="timeline-line"></div>
         </div>
 
-        <!-- 19 March - صورة الفنجان -->
+        <!-- 19 March - ALBUM -->
         <div class="memory-card">
             <div class="memory-date-badge">
                 <span class="day">19</span>
                 <span class="month">مارس</span>
             </div>
-            <div class="memory-content">
+            <div class="memory-content" onclick="openAlbum()">
                 <div class="memory-image">
                     <img src="IMG-20260320-WA0021.jpg" alt="19 مارس - فنجان القهوة">
                     <div class="memory-overlay"><span class="memory-icon">☕</span></div>
                 </div>
                 <div class="memory-text">
-                    <h3>أول فنجان مع بعض</h3>
-                    <p>19 مارس 2026... يوم ما شربنا أول فنجان قهوة مع بعض. كل رشفة كانت مليانة حب ودفا. افتكر لما قعدنا واتكلمنا وسهرنا؟</p>
+                    <h3>يوم 19 مارس</h3>
+                    <p>يوم ما اتعرفنا وقعدنا نتكلم ونشرب قهوة سوا. كل لحظة فيه كانت جميلة ومليانة مشاعر.</p>
                     <div class="memory-tags">
                         <span class="tag">☕ قهوة</span>
-                        <span class="tag">❤️ أول مرة</span>
+                        <span class="tag">❤️ أول لقاء</span>
+                    </div>
+                    <div class="album-hint">
+                        <span>📸</span>
+                        <span>اضغط هنا عشان تشوف الألبوم</span>
                     </div>
                 </div>
             </div>
@@ -650,9 +823,43 @@
         </div>
     </div>
 
+    <!-- ALBUM MODAL -->
+    <div class="album-modal" id="albumModal">
+        <div class="album-header">
+            <h3 class="album-title">📸 ألبوم 19 مارس</h3>
+            <button class="album-close" onclick="closeAlbum()">✕</button>
+        </div>
+        <div class="album-grid" id="albumGrid"></div>
+    </div>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+        <button class="lightbox-nav lightbox-prev" onclick="prevItem()">‹</button>
+        <button class="lightbox-nav lightbox-next" onclick="nextItem()">›</button>
+        <img class="lightbox-img" id="lightboxImg" src="" alt="">
+        <video class="lightbox-video" id="lightboxVideo" controls style="display:none;"></video>
+    </div>
+
     <canvas id="confetti"></canvas>
 
     <script>
+        // ===== ALBUM DATA =====
+        const albumItems = [
+            { type: 'image', src: 'IMG-20260320-WA0002.jpg', caption: 'لحظة حلوة' },
+            { type: 'image', src: 'IMG-20260320-WA0007.jpg', caption: 'ذكرى جميلة' },
+            { type: 'image', src: 'IMG-20260320-WA0015.jpg', caption: 'مع بعض' },
+            { type: 'image', src: 'IMG-20260320-WA0016.jpg', caption: 'ضحكة حلوة' },
+            { type: 'image', src: 'IMG-20260320-WA0017.jpg', caption: 'لحظة سعيدة' },
+            { type: 'image', src: 'IMG-20260320-WA0019.jpg', caption: 'ذكرى مميزة' },
+            { type: 'image', src: 'IMG-20260320-WA0021.jpg', caption: 'أول فنجان ☕' },
+            { type: 'video', src: 'VID-20260320-WA0000.mp4', caption: 'فيديو حلو' },
+            { type: 'video', src: 'VID-20260320-WA0009.mp4', caption: 'لحظة نادرة' }
+        ];
+
+        let currentIndex = 0;
+
+        // ===== LOGIN =====
         function login() {
             const username = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value.trim();
@@ -679,6 +886,7 @@
             if (e.key === 'Enter') login();
         });
 
+        // ===== SHOW MEMORIES =====
         function showMemories() {
             document.getElementById('welcomeScreen').classList.remove('active');
             document.getElementById('memoriesContainer').classList.add('active');
@@ -696,6 +904,77 @@
             cards.forEach(card => observer.observe(card));
         }
 
+        // ===== ALBUM =====
+        function openAlbum() {
+            const modal = document.getElementById('albumModal');
+            const grid = document.getElementById('albumGrid');
+
+            grid.innerHTML = albumItems.map((item, index) => `
+                <div class="album-item ${item.type === 'video' ? 'video' : ''}" onclick="openLightbox(${index})">
+                    <img src="${item.src}" alt="${item.caption}" loading="lazy">
+                </div>
+            `).join('');
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAlbum() {
+            document.getElementById('albumModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // ===== LIGHTBOX =====
+        function openLightbox(index) {
+            currentIndex = index;
+            const item = albumItems[index];
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightboxImg');
+            const video = document.getElementById('lightboxVideo');
+
+            if (item.type === 'video') {
+                img.style.display = 'none';
+                video.style.display = 'block';
+                video.src = item.src;
+                video.play();
+            } else {
+                video.style.display = 'none';
+                video.pause();
+                img.style.display = 'block';
+                img.src = item.src;
+            }
+
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            const video = document.getElementById('lightboxVideo');
+            video.pause();
+            lightbox.classList.remove('active');
+        }
+
+        function prevItem() {
+            currentIndex = (currentIndex - 1 + albumItems.length) % albumItems.length;
+            openLightbox(currentIndex);
+        }
+
+        function nextItem() {
+            currentIndex = (currentIndex + 1) % albumItems.length;
+            openLightbox(currentIndex);
+        }
+
+        // Close on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+                closeAlbum();
+            }
+            if (e.key === 'ArrowLeft') prevItem();
+            if (e.key === 'ArrowRight') nextItem();
+        });
+
+        // ===== CONFETTI =====
         function launchConfetti() {
             const canvas = document.getElementById('confetti');
             const ctx = canvas.getContext('2d');
