@@ -690,7 +690,227 @@
             z-index: 999;
         }
 
-        /* ===== RESPONSIVE ===== */
+        
+        /* ===== ALBUM TIMELINE PAGE ===== */
+        .album-timeline-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+        }
+
+        .album-timeline-header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .album-back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.95rem;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .album-back-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateX(-5px);
+        }
+
+        .album-timeline-title {
+            color: var(--white);
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .album-timeline-subtitle {
+            color: rgba(255,255,255,0.7);
+            font-size: 1.1rem;
+        }
+
+        .album-timeline-line {
+            width: 3px;
+            height: 80px;
+            background: linear-gradient(to bottom, var(--primary-light), transparent);
+            margin: 30px auto;
+            border-radius: 3px;
+        }
+
+        .album-memory-card {
+            margin-bottom: 60px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .album-memory-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .album-memory-number {
+            position: absolute;
+            top: -15px;
+            right: 50%;
+            transform: translateX(50%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: var(--white);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 800;
+            z-index: 10;
+            box-shadow: 0 5px 20px rgba(136, 14, 79, 0.4);
+            border: 3px solid rgba(255,255,255,0.3);
+        }
+
+        .album-memory-content {
+            background: rgba(30, 30, 40, 0.6);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 25px;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .album-memory-content:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .album-memory-image {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .album-memory-image img,
+        .album-memory-image video {
+            width: 100%;
+            max-height: 500px;
+            object-fit: contain;
+            background: rgba(0,0,0,0.3);
+            display: block;
+        }
+
+        .album-memory-image.video-thumb::after {
+            content: '▶️';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            opacity: 0.9;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .album-memory-image.video-thumb:hover::after {
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+
+        .album-memory-text {
+            padding: 30px 35px;
+            text-align: center;
+        }
+
+        .album-memory-quote {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 2;
+            font-weight: 500;
+            position: relative;
+            padding: 15px 0;
+        }
+
+        .album-memory-quote::before {
+            content: '"';
+            font-size: 3rem;
+            color: var(--primary-light);
+            opacity: 0.5;
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-family: serif;
+        }
+
+        .album-memory-quote::after {
+            content: '"';
+            font-size: 3rem;
+            color: var(--primary-light);
+            opacity: 0.5;
+            position: absolute;
+            bottom: -25px;
+            left: -10px;
+            font-family: serif;
+        }
+
+        .album-memory-date {
+            color: var(--primary-light);
+            font-size: 0.9rem;
+            margin-top: 15px;
+            opacity: 0.8;
+        }
+
+        .album-memory-tags {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .album-memory-tags .tag {
+            background: rgba(136, 14, 79, 0.3);
+            color: #ff8fab;
+            border: 1px solid rgba(136, 14, 79, 0.4);
+        }
+
+        .album-memory-tags .tag:hover {
+            background: var(--primary-light);
+            color: var(--white);
+        }
+
+        .album-footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+        }
+
+        .album-footer-heart {
+            font-size: 2rem;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            margin-bottom: 10px;
+        }
+
+        /* Video player in album */
+        .album-video-player {
+            width: 100%;
+            max-height: 500px;
+            border-radius: 0;
+        }
+/* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
             .memory-content { grid-template-columns: 1fr; }
             .memory-content.reverse { direction: rtl; }
@@ -883,10 +1103,8 @@
             <h3 class="album-title" id="albumTitle">📸 الألبوم</h3>
             <button class="album-close" onclick="closeAlbum()">✕</button>
         </div>
-        <div class="album-grid" id="albumGrid"></div>
-    </div>
-
-    <!-- LIGHTBOX -->
+        <div class="album-timeline-container" id="albumTimelineContainer"></div>
+    </div><!-- LIGHTBOX -->
     <div class="lightbox" id="lightbox">
         <button class="lightbox-close" onclick="closeLightbox()">✕</button>
         <button class="lightbox-nav lightbox-prev" onclick="prevItem()">‹</button>
@@ -1012,23 +1230,135 @@
 
             currentAlbum = album;
             const modal = document.getElementById('albumModal');
-            const grid = document.getElementById('albumGrid');
+            const container = document.getElementById('albumTimelineContainer');
             const title = document.getElementById('albumTitle');
 
             title.textContent = album.title;
 
-            grid.innerHTML = album.items.map((item, index) => `
-                <div class="album-item ${item.type === 'video' ? 'video' : ''}" onclick="openLightbox(${index})">
-                    <img src="${item.src}" alt="${item.caption}" loading="lazy">
-                    <div class="album-caption">${item.caption}</div>
-                </div>
-            `).join('');
+            // Beautiful quotes for each photo
+            const quotes = {
+                march19: [
+                    "أول قهوة سوا... ودايماً هنفضل سوا ☕❤️",
+                    "ابتسامتك في أول يوم عرفتني إن الدنيا لسه بخير 😊",
+                    "العيون اللي شوفتها وعرفت إن فيها حكاية 🥰",
+                    "كل ضحكة منك بتخلي اليوم أجمل 💕",
+                    "لحظة ما حسيت إن قلبي لقى بيته 🏠❤️",
+                    "ذكرى مش هتتكرر، ولا هتتنسى أبداً ✨",
+                    "أول فنجان قهوة... وأول حب حقيقي ☕💘",
+                    "لحظة مسجلة بالقلب مش بالكاميرا بس 🎥❤️",
+                    "كل ثانية في الفيديو دي كانت عمر جديد 🎬💕"
+                ],
+                april1: [
+                    "1 أبريل... بس مش مقلب! ده حب حقيقي 🌸",
+                    "ربيع وجمال وإنتي جنبي... أكتر من كده إيه؟ 🌷",
+                    "كل يوم بيكون أحلى لما بيكون معاكي 🌹",
+                    "عيونك في الصورة دي سرقت قلبي تاني 💖",
+                    "ضحكتك نور في أحلى يوم 🌞",
+                    "مع بعض... ودايماً هنفضل مع بعض 💑",
+                    "ذكرى من ذكرياتنا الحلوة اللي فاتت بسرعة ⏰💕"
+                ],
+                april8: [
+                    "8 أبريل... يوم فاضل حب ومشاعر 💗",
+                    "كل صورة بتقول إننا مكملين سوا 📸❤️",
+                    "لحظة حلوة وقلب مبسوط 🥰",
+                    "الدنيا حلوة أوي لما بنكون مع بعض 🌍💕",
+                    "فرحة مش عادية... فرحة بيكي 🎈",
+                    "بيتنا اللي بنبنيه بذكرياتنا 🏠❤️",
+                    "كل يوم جديد معاكي بيكون أحلى 🌟",
+                    "صورة من صور حياتنا الحلوة 📷💘",
+                    "حبنا بيكبر كل يوم أكتر 🔥",
+                    "ذكرى تانية نحطها في صندوق الجمال 🎁",
+                    "11 صورة... و11 ألف ذكرى حلوة 💝"
+                ],
+                april23: [
+                    "23 أبريل... يوم مميز زيكي 💎",
+                    "كل صورة بتفتح باب ذكرى حلوة 🚪❤️",
+                    "عيونك في الصورة دي بتتكلم عن حب 🥺",
+                    "لحظة سرقت فيها قلبي من تاني 💘",
+                    "يوم مش هينساه قلبي أبداً 📝❤️",
+                    "كل يوم معاكي بيكون أجمل يوم 🌈",
+                    "7 صور... و7 ألوان من الحب 🎨💕"
+                ]
+            };
 
+            const albumQuotes = quotes[albumId] || album.items.map(() => "ذكرى حلوة من ذكرياتنا ❤️");
+
+            let html = `
+                <div class="album-timeline-header">
+                    <button class="album-back-btn" onclick="closeAlbum()">
+                        <span>←</span>
+                        <span>رجوع للذكريات</span>
+                    </button>
+                    <div class="album-timeline-line"></div>
+                    <h2 class="album-timeline-title">${album.title.replace('📸 ', '')}</h2>
+                    <p class="album-timeline-subtitle">كل صورة ليها حكاية... وكل حكاية ليها قلب ❤️</p>
+                    <div class="album-timeline-line"></div>
+                </div>
+            `;
+
+            album.items.forEach((item, index) => {
+                const isVideo = item.type === 'video';
+                const quote = albumQuotes[index] || "ذكرى حلوة من ذكرياتنا ❤️";
+
+                html += `
+                    <div class="album-memory-card">
+                        <div class="album-memory-number">${index + 1}</div>
+                        <div class="album-memory-content">
+                            <div class="album-memory-image ${isVideo ? 'video-thumb' : ''}" onclick="${isVideo ? 'playAlbumVideo(this)' : 'openLightbox(' + index + ')'}">
+                                ${isVideo 
+                                    ? `<video class="album-video-player" src="${item.src}" preload="metadata" muted></video>`
+                                    : `<img src="${item.src}" alt="${item.caption}" loading="lazy">`
+                                }
+                            </div>
+                            <div class="album-memory-text">
+                                <p class="album-memory-quote">${quote}</p>
+                                <p class="album-memory-date">📅 ${album.title.replace('📸 ألبوم ', '')} · صورة ${index + 1} من ${album.items.length}</p>
+                                <div class="album-memory-tags">
+                                    <span class="tag">❤️ حب</span>
+                                    <span class="tag">📸 ذكرى</span>
+                                    ${isVideo ? '<span class="tag">🎥 فيديو</span>' : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `
+                <div class="album-footer">
+                    <div class="album-footer-heart">❤️</div>
+                    <p>بطوطي... كل صورة فيكي بتستاهل تتعاش</p>
+                </div>
+            `;
+
+            container.innerHTML = html;
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
+
+            // Setup scroll animation for album cards
+            setTimeout(() => {
+                const cards = container.querySelectorAll('.album-memory-card');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) entry.target.classList.add('visible');
+                    });
+                }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
+                cards.forEach(card => observer.observe(card));
+
+                // Trigger first card immediately
+                if (cards[0]) cards[0].classList.add('visible');
+            }, 100);
         }
 
-        function closeAlbum() {
+        function playAlbumVideo(element) {
+            const video = element.querySelector('video');
+            if (video) {
+                video.muted = false;
+                video.play();
+                video.controls = true;
+                element.classList.remove('video-thumb');
+            }
+        }function closeAlbum() {
             document.getElementById('albumModal').classList.remove('active');
             document.body.style.overflow = '';
         }
@@ -1057,9 +1387,7 @@
             }
 
             lightbox.classList.add('active');
-        }
-
-        function closeLightbox() {
+        }function closeLightbox() {
             const lightbox = document.getElementById('lightbox');
             const video = document.getElementById('lightboxVideo');
             video.pause();
